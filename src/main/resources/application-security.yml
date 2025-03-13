@@ -1,0 +1,24 @@
+# application-security.yml
+
+spring:
+  devtools:
+    restart:
+      # 生产环境需禁用热部署
+      enabled: true
+
+  # JWT 配置（根据实际需求）
+  # jwt:
+  #   secret: your-secret-key
+  #   expiration: 86400  # 24小时
+
+  # 文件上传限制（可选）
+  # servlet:
+  #   multipart:
+  #     max-file-size: 10MB
+  #     max-request-size: 10MB
+
+  # 跨域配置（前端联调时启用）
+  # mvc:
+  #   cors:
+  #     allowed-origins: http://localhost:8080
+  #     allowed-methods: GET,POST,PUT,DELETE

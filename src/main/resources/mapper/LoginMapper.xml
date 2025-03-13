@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ysu.lgq.sale_erp.mapper.LoginMapper">
+
+    <resultMap id="BaseResultMap" type="ysu.lgq.sale_erp.entity.User">
+        <result column="id" property="id" />
+        <result column="nickname" property="nickname" />
+        <result column="account" property="account" />
+        <result column="password" property="password" />
+        <result column="user_type" property="userType" />
+        <result column="phone_number" property="phoneNumber" />
+        <result column="avatar_url" property="avatarUrl" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+
+</mapper>

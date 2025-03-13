@@ -1,0 +1,10 @@
+spring:
+  # 引入其他配置文件
+  profiles:
+    include:
+      - server
+      - logging
+      - datasource
+      - mybatis-plus
+      - redis
+      - security

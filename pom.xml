@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--    项目基本信息      -->
+    <groupId>ysu.lgq</groupId>
+    <artifactId>sale_erp</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>sale_erp</name>
+    <description>基于SpringBoot的销售管理系统设计与开发</description>
+
+    <!--    项目属性      -->
+    <properties>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring-boot.version>3.1.0</spring-boot.version>
+        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <pagehelper.version>2.1.0</pagehelper.version>
+        <fastjson.version>1.2.83</fastjson.version>
+
+    </properties><!---->
+
+    <dependencies>
+        <!-- Spring Boot Web (spring-boot-starter-web) -->
+        <!-- 用途: 构建基于 Spring 的 Web 应用和 RESTful 服务。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Test (spring-boot-starter-test) -->
+        <!-- 用途: 编写和运行应用程序的单元测试和集成测试。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring Boot JDBC (spring-boot-starter-jdbc) -->
+        <!-- 用途: 简化数据库操作，提供基于 JDBC 的数据访问功能。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Web Services (spring-boot-starter-web-services) -->
+        <!-- 用途: 构建和使用 Web 服务，实现跨系统通信。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web-services</artifactId>
+        </dependency>
+
+        <!-- Spring Session JDBC (spring-session-jdbc) -->
+        <!-- 用途: 在集群环境中管理用户会话，实现会话共享和高可用性。 -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.session</groupId>-->
+<!--            <artifactId>spring-session-jdbc</artifactId>-->
+<!--        </dependency>-->
+
+        <!-- MySQL Connector (mysql-connector-j) -->
+        <!-- 用途: 连接应用程序到 MySQL 数据库进行数据存储和检索。 -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- MyBatis-Plus (mybatis-plus-boot-starter) -->
+        <!-- 用途: 增强 MyBatis 功能，提供 CRUD 接口、代码生成、分页等功能。 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+
+
+        <!-- PageHelper (pagehelper-spring-boot-starter) -->
+        <!-- 用途: 在数据库查询中实现分页，提高查询效率。 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
+
+        <!-- Lombok (lombok) -->
+        <!-- 用途: 简化 Java 代码，减少样板代码，如 getter/setter 和构造函数。 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- JWT (jjwt) -->
+        <!-- 用途: 实现身份验证和授权机制。 -->
+        <!-- jjwt API -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <!-- jjwt 运行时实现 -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- jjwt Jackson 支持（根据需要选择） -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId> <!-- 或 jjwt-gson -->
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- FastJSON (fastjson) -->
+        <!-- 用途: 简化 JSON 数据处理，提高数据交换效率。 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <!-- Apache Commons Lang (commons-lang3) -->
+        <!-- 用途: 提供对 Java 语言核心类的扩展，如字符串处理、日期时间操作等。 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.14.0</version>
+        </dependency>
+
+        <!-- JUnit (junit) -->
+        <!-- 用途: 编写和运行应用程序的单元测试。 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Redis (spring-boot-starter-data-redis) -->
+        <!-- 用途: 实现缓存、消息队列等功能，提高数据访问速度。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!-- Redis 客户端 (jedis) -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>5.2.0</version>
+        </dependency>
+
+        <!-- Spring Boot DevTools (spring-boot-devtools) -->
+        <!-- 用途: 提高开发效率，支持自动重启和热部署。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+
+        <!-- bcrypt工具包  -->
+        <!-- 用途: 实现 bcrypt 加密，用于密码保护。 -->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
+
+        <!-- swagger  -->
+        <!-- 用途: 方便生成Api文档 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
+
+
+
+
+    </dependencies>
+
+    <!--    父 POM（Parent POM）  导入 Spring Boot 的依赖管理  -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--    构建（Build）-->
+    <build>
+        <plugins>
+            <!--    编译器插件: 配置了 Java 17 的编译器和编码。-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!--    Spring Boot Maven 插件: 配置了主类并跳过了构建步骤，但在执行阶段重新打包。-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <mainClass>ysu.lgq.sale_erp.App</mainClass>
+                    <skip>true</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
