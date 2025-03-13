@@ -50,6 +50,13 @@ public class Results<T> {
         return result;
     }
 
+    public static <T> Results<T> Error(String message) {
+        Results<T> result = new Results<>();
+        result.setSuccess(false);
+        result.setCode(404);
+        result.setMessage(message);
+        return result;
+    }
 
     public static <T> Results<T> Error(Integer code, String message) {
         Results<T> result = new Results<>();

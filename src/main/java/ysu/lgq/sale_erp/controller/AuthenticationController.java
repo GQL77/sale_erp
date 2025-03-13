@@ -1,18 +1,13 @@
 package ysu.lgq.sale_erp.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ysu.lgq.sale_erp.entity.Results;
-import ysu.lgq.sale_erp.entity.User;
 import ysu.lgq.sale_erp.service.IUserService;
-import ysu.lgq.sale_erp.util.JwtUtils;
-import static ysu.lgq.sale_erp.util.BCryptUtil.*;
 
 import java.util.Map;
-import java.util.HashMap;
+
 
 
 //register(): 用户注册。
