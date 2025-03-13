@@ -24,12 +24,12 @@ public class AuthenticationController {
     private IUserService userService;
 
     @PostMapping("/login")
-    public Results login(@RequestBody Map<String, Object> request) {
+    public Results<String> login(@RequestBody Map<String, Object> request) {
         return userService.login((String)request.get("account"),(String)request.get("password"));
     }
 
     @PostMapping("/register")
-    public Results register(@RequestBody Map<String, Object> request) {
+    public Results<String> register(@RequestBody Map<String, Object> request) {
         String account = (String)request.get("account");
         String username = (String)request.get("username");
         int role =(int) request.get("role");
@@ -39,9 +39,9 @@ public class AuthenticationController {
     }
 
     @PostMapping("/forgotPassword")
-    public Results forgotPassword(@RequestBody Map<String, Object> request) {
-        String account = (String)request.get("account");
-        String password = (String)request.get("password");
+    public Results<String> forgotPassword(@RequestBody Map<String, Object> request) {
+//        String account = (String)request.get("account");
+//        String password = (String)request.get("password");
 //        String newPassword = (String)request.get("newPassword");
 //        return userService.forgotPassword(account,password,newPassword);
         return Results.Error(503,"服务不可用");

@@ -30,7 +30,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private UserMapper userMapper;
 
     @Override
-    public Results login(String account, String password) {
+    public Results<String> login(String account, String password) {
         System.out.println("输入account:"+account+" password:"+password);
         //判断账号是否存在
         User user=userMapper.selectOne(new QueryWrapper<User>().eq("account", account));
@@ -55,7 +55,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public Results register(String account, String username, int role, String phone) {
+    public Results<String> register(String account, String username, int role, String phone) {
         if (userMapper.selectOne(new QueryWrapper<User>().eq("account",account)) != null){
             return Results.Error(422,"用户名已存在");
         }else {

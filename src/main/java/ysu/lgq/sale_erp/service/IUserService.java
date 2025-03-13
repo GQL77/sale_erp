@@ -20,6 +20,6 @@ import static ysu.lgq.sale_erp.util.BCryptUtil.hashPassword;
  */
 public interface IUserService extends IService<User> {
 
-    Results login(String account, String password);
-    Results register(String account, String username, int role, String phone);
+    Results<String> login(String account, String password);
+    Results<String> register(String account, String username, int role, String phone);
 }
