@@ -9,10 +9,17 @@ spring:
       timeout: 3000
       lettuce:
         pool:
-          max-active: 8
+          max-active: 16
           # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
-          max-wait: -1
+          max-wait: 5000
           # 连接池中的最大空闲连接 默认 8
           max-idle: 8
           # 连接池中的最小空闲连接 默认 0
-          min-idle: 0
+          min-idle: 2
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600000    # 缓存默认过期时间（1小时）
+      key-prefix: "CACHE:"     # 键前缀（避免与其他业务数据冲突）
+      use-key-prefix: true     # 启用键前缀
+      cache-null-values: false # 是否缓存空值（建议false）

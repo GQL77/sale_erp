@@ -14,9 +14,10 @@ public class JwtUtils {
 
 
     // 使用安全的密钥生成方法生成密钥
-    //private static final String SECRET_KEY = "javax.crypto.spec.SecretKeySpec@5880cb2";
     private static final SecretKey SECRET_KEY =  Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private static final long EXPIRE = 3600000 * 24L; // 24小时
+
+    private JwtUtils() {}
 
     /**
      * 生成 JWT 字符串

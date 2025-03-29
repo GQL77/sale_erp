@@ -3,6 +3,8 @@ package ysu.lgq.sale_erp.util;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class BCryptUtil{
+
+    private BCryptUtil() {}
     /**
      * 生成一个加盐的 bcrypt 哈希
      *

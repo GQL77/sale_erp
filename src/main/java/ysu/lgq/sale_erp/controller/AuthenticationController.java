@@ -1,14 +1,10 @@
 package ysu.lgq.sale_erp.controller;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ysu.lgq.sale_erp.entity.Results;
 import ysu.lgq.sale_erp.service.IUserService;
 
 import java.util.Map;
-
-
 
 //register(): 用户注册。
 //login(): 用户登录。
@@ -18,10 +14,15 @@ import java.util.Map;
 @RestController
 @RequestMapping("")
 @CrossOrigin(origins = "*")
-@RequiredArgsConstructor
 public class AuthenticationController {
-    @Autowired
-    private IUserService userService;
+
+    private final IUserService userService;
+
+
+    public AuthenticationController(IUserService userService) {
+        this.userService = userService;
+    }
+
 
     @PostMapping("/login")
     public Results<String> login(@RequestBody Map<String, Object> request) {
@@ -40,10 +41,12 @@ public class AuthenticationController {
 
     @PostMapping("/forgotPassword")
     public Results<String> forgotPassword(@RequestBody Map<String, Object> request) {
-//        String account = (String)request.get("account");
-//        String password = (String)request.get("password");
-//        String newPassword = (String)request.get("newPassword");
-//        return userService.forgotPassword(account,password,newPassword);
+/*
+        String account = (String)request.get("account");
+        String password = (String)request.get("password");
+        String newPassword = (String)request.get("newPassword");
+        return userService.forgotPassword(account,password,newPassword);
+*/
         return Results.Error(503,"服务不可用");
     }
 

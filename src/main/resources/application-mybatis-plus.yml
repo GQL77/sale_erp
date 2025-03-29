@@ -1,5 +1,5 @@
 mybatis-plus:
-  type-aliases-package: ysu.lgq.sale_erp.pojo
+  type-aliases-package: ysu.lgq.sale_erp.entity
   mapper-locations: classpath:/mapper/*.xml
   configuration:
     # 下划线和驼啊峰命名转换

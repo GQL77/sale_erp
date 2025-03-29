@@ -4,6 +4,8 @@ package ysu.lgq.sale_erp.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 //成功类
 //        200：操作成功。
@@ -18,6 +20,8 @@ import lombok.Data;
 //        503：服务不可用。
 
 @Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(description = "统一返回结果")
 public class Results<T> {
 

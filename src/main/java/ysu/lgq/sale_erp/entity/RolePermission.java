@@ -20,34 +20,22 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("permission")
-public class Permission implements Serializable {
+@TableName("role_permission")
+public class RolePermission implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
+     * 身份ID
+     */
+    @TableId(value = "role_id", type = IdType.AUTO)
+    private Integer roleId;
+
+    /**
      * 权限ID
      */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
-
-    /**
-     * 权限名称
-     */
-    @TableField("name")
-    private String name;
-
-    /**
-     * 权限描述
-     */
-    @TableField("description")
-    private String description;
-
-    /**
-     * 权限类型
-     */
-    @TableField("type")
-    private String type;
+    @TableField("permission_id")
+    private Integer permissionId;
 
 
 }

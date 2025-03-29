@@ -1,6 +1,6 @@
 package ysu.lgq.sale_erp.service;
 
-import ysu.lgq.sale_erp.entity.Role;
+import ysu.lgq.sale_erp.entity.RolePermission;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,9 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author lgq
- * @since 2025-03-10
+ * @since 2025-03-29
  */
-public interface IRoleService extends IService<Role> {
-    //Role getRoleById(String name);
+public interface IRolePermissionService extends IService<RolePermission> {
 
 }
