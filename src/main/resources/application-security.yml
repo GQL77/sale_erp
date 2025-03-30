@@ -7,9 +7,9 @@ spring:
       enabled: true
 
   # JWT 配置（根据实际需求）
-  # jwt:
-  #   secret: your-secret-key
-  #   expiration: 86400  # 24小时
+#  jwt:
+#    secret: "kH3DydThy98FSdpdOqG8P5bqyYxXelDbsweOCuw9iJE="
+#    expiration: 86400  # 24小时（单位：秒）
 
   # 文件上传限制（可选）
   # servlet:

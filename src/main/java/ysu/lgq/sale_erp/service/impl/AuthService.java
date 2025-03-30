@@ -1,6 +1,8 @@
 package ysu.lgq.sale_erp.service.impl;
 
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ysu.lgq.sale_erp.entity.Permission;
 import ysu.lgq.sale_erp.entity.RolePermission;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class AuthService {
+    private static final String PERMISSION_CACHE_NAME = "role_permissions";
 
     private final IRolePermissionService rolePermissionService;
     private final IPermissionService permissionService;
@@ -25,10 +28,12 @@ public class AuthService {
         this.permissionService = permissionService;
     }
 
-/**
- * 获取用户权限列表
- */
+    /**
+    * 获取用户权限列表
+    */
+    @Cacheable(value = PERMISSION_CACHE_NAME, key = "#roleId", unless = "#result.isEmpty()")
     public HashMap<Object, String> QueryRolePermission(int roleId) {
+        System.out.println("方法被调用，roleId: " + roleId);
 
         //获得Permission.id的List
         Map<String,Object> queryCondition = new HashMap<>();
@@ -50,6 +55,12 @@ public class AuthService {
             result.put( permission.getId() ,permission.getName());
         }
         return result;
+    }
+
+    // 添加缓存清理方法（当权限变更时调用）
+    @CacheEvict(value = PERMISSION_CACHE_NAME, key = "#roleId")
+    public void clearRolePermissionsCache(Integer roleId) {
+        // 空方法，通过注解触发缓存清理
     }
 
 }

@@ -5,14 +5,11 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-
 import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.Map;
 
 public class JwtUtils {
-
-
     // 使用安全的密钥生成方法生成密钥
     private static final SecretKey SECRET_KEY =  Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private static final long EXPIRE = 3600000 * 24L; // 24小时
@@ -78,7 +75,8 @@ public class JwtUtils {
 
     // 示例用法
     public static void main(String[] args) {
-        System.out.println("JwtUtils.main" + "----当前签名密钥："+ SECRET_KEY+ " 请谨慎保存");
+        String base64Key = java.util.Base64.getEncoder().encodeToString(SECRET_KEY.getEncoded());
+        System.out.println("签名密钥："+ base64Key+ " 请谨慎保存");
         Map<String, Object> claims = Map.of(
                 "sub"  , "1234567890",
                 "name" , "John Doe"  ,

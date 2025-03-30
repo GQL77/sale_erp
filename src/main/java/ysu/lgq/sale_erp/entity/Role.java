@@ -23,6 +23,8 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @TableName("role")
 public class Role implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     @TableField("name")

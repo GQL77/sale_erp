@@ -16,6 +16,9 @@ spring:
           max-idle: 8
           # 连接池中的最小空闲连接 默认 0
           min-idle: 2
+      redisTemplate:
+        keySerializer: org.springframework.data.redis.serializer.StringRedisSerializer
+        valueSerializer: org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer
   cache:
     type: redis
     redis:

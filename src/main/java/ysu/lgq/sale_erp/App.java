@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import ysu.lgq.sale_erp.util.JwtUtils;
@@ -17,7 +18,7 @@ import ysu.lgq.sale_erp.util.JwtUtils;
 * @Version:1.0.0  
 
  */
-//去掉自动注册了
+@EnableCaching
 @EnableScheduling
 @SpringBootApplication(exclude = PageHelperAutoConfiguration.class)
 @MapperScan("ysu.lgq.sale_erp.mapper")

@@ -130,14 +130,26 @@
             <version>3.14.0</version>
         </dependency>
 
-        <!-- JUnit (junit) -->
+        <!-- JUnit 5 依赖 -->
         <!-- 用途: 编写和运行应用程序的单元测试。 -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
             <scope>test</scope>
         </dependency>
 
+
+        <!-- Spring Cache-->
+        <!-- 用途: 通过声明式注解简化缓存开发。统一管理多种缓存实现（如 Redis）。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
         <!-- Redis (spring-boot-starter-data-redis) -->
         <!-- 用途: 实现缓存、消息队列等功能，提高数据访问速度。 -->
         <dependency>

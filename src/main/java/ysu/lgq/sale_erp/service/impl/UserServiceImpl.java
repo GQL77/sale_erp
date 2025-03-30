@@ -47,15 +47,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
                 return Results.Error(403,"账号已冻结，联系相关部门处理");
             }else if(checkPassword(password,user.getPassword())){
 
+                // 1. 查询角色名称
+                String roleName =roleService.getById(user.getRole()).getName();
+                // 2. 查询权限（自动从 Redis 缓存读取）
+                Map<Object, String> permissions = authService.QueryRolePermission(user.getRole());
+                //authService.clearRolePermissionsCache(1);
+                // 3. 构建 JWT Claims
                 Map<String, Object> claims = new HashMap<>();
                 claims.put("account", user.getAccount());
                 claims.put("username", user.getUsername());
-                claims.put("role", roleService.getById(user.getRole()).getName());
-                Map<Object,String> permission = authService.QueryRolePermission(user.getRole());
-                claims.put("permission", permission);
+                claims.put("role", roleName);
+                claims.put("permission", permissions);
                 claims.put("email", user.getEmail());
                 claims.put("phone", user.getPhone());
-
                 System.out.println("返回数据："+claims);
                 String jwt = JwtUtils.generateJwt(claims);
                 System.out.println("jwt令牌："+jwt);

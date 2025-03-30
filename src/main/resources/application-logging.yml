@@ -2,4 +2,6 @@
 logging:
   level:
     root: INFO
-    org.springframework: INFO
+    org.springframework: INFO #INFO WARN ERROR
+    org.springframework.cache: DEBUG # 查看缓存操作日志（调试后改为 INFO）
+    org.springframework.data.redis: DEBUG  # 查看Redis连接细节
