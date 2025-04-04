@@ -23,6 +23,7 @@ public class User implements Serializable {
     private String password;
     private String username;
     private Integer role;
+    private String branch;
     private String email;
     private String phone;
     private String status;

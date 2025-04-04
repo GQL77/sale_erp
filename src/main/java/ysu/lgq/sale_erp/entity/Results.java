@@ -22,8 +22,9 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+//@JsonInclude(JsonInclude.Include.NON_NULL)  // 忽略 null 字段
 @ApiModel(description = "统一返回结果")
-public class Results<T> {
+public class Results {
 
     @ApiModelProperty(value = "是否成功")
     private Boolean success;
@@ -35,39 +36,32 @@ public class Results<T> {
     private String message;
 
     @ApiModelProperty(value = "返回数据")
-    private T data;
+    private Object data;
 
-
-    public static <T> Results<T> Success() {
-        Results<T> result = new Results<>();
-        result.setSuccess(true);
-        result.setCode(200);
-        result.setMessage("操作成功");
-        return result;
-    }
-    public static <T> Results<T> Success(T data) {
-        Results<T> result = new Results<>();
-        result.setSuccess(true);
-        result.setCode(200);
-        result.setMessage("操作成功");
-        result.setData(data);
-        return result;
+    // 私有构造方法，确保通过工厂方法创建对象
+    private Results(Boolean success, Integer code, String message, Object data) {
+        this.success = success;
+        this.code = code;
+        this.message = message;
+        this.data = data;
     }
 
-    public static <T> Results<T> Error(String message) {
-        Results<T> result = new Results<>();
-        result.setSuccess(false);
-        result.setCode(404);
-        result.setMessage(message);
-        return result;
+    // 成功结果工厂方法
+    public static Results Success() {
+        return new Results(true, 200, "操作成功", null);
     }
 
-    public static <T> Results<T> Error(Integer code, String message) {
-        Results<T> result = new Results<>();
-        result.setSuccess(false);
-        result.setCode(code);
-        result.setMessage(message);
-        return result;
+    public static Results Success(Object data) {
+        return new Results(true, 200, "操作成功", data);
+    }
+
+    // 错误结果工厂方法
+    public static Results Error(String message) {
+        return new Results(false, 404, message, null);
+    }
+
+    public static Results Error(Integer code, String message) {
+        return new Results(false, code, message, null);
     }
 
 }

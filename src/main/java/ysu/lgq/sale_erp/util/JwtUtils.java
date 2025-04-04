@@ -5,94 +5,96 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import jakarta.annotation.PostConstruct;
 import javax.crypto.SecretKey;
+import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
+
 public class JwtUtils {
-    // 使用安全的密钥生成方法生成密钥
-    private static final SecretKey SECRET_KEY =  Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    private static final long EXPIRE = 3600000 * 24L; // 24小时
+    private static final SecretKey SECRET_KEY;
+    private static final long EXPIRE = 3600000 * 24L;
+
+    static {
+        // 从环境变量或硬编码加载密钥（示例硬编码）
+        String secretKeyBase64 = "kH3DydThy98FSdpdOqG8P5bqyYxXelDbsweOCuw9iJE=";
+        byte[] decodedKey = Base64.getDecoder().decode(secretKeyBase64);
+        SECRET_KEY = Keys.hmacShaKeyFor(decodedKey);
+    }
 
     private JwtUtils() {}
 
     /**
-     * 生成 JWT 字符串
-     *
-     * @param claims 自定义声明
-     * @return JWT 字符串
+     * 生成 JWT
      */
     public static String generateJwt(Map<String, Object> claims) {
-        String jwt = Jwts.builder()
-                .setClaims(claims) // 设置自定义声明
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRE)) // 设置过期时间
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY) // 签名
-                .compact(); // 压缩为字符串
-        return jwt;
+        return Jwts.builder()
+                .setClaims(claims)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
+                .signWith(SECRET_KEY, SignatureAlgorithm.HS256)
+                .compact();
     }
 
     /**
-     * 解析 JWT 并返回声明
-     *
-     * @param jwt JWT 字符串
-     * @return 声明对象
-     * @throws RuntimeException 如果 JWT 无效或签名验证失败
+     * 解析 JWT
      */
     public static Claims parseJwt(String jwt) {
         try {
-            Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(SECRET_KEY) // 设置签名密钥
+            return Jwts.parserBuilder()
+                    .setSigningKey(SECRET_KEY)
                     .build()
-                    .parseClaimsJws(jwt) // 解析 JWS
-                    .getBody(); // 获取声明
-            return claims;
+                    .parseClaimsJws(jwt)
+                    .getBody();
         } catch (JwtException e) {
-            // 处理解析异常，例如签名验证失败
             throw new RuntimeException("Invalid JWT token", e);
         }
     }
 
     /**
      * 验证 JWT 是否过期
-     *
-     * @param jwt JWT 字符串
-     * @return 如果未过期则返回 true，否则返回 false
      */
-
     public static boolean isJwtExpired(String jwt) {
         try {
             Claims claims = parseJwt(jwt);
-            Date expiration = claims.getExpiration();
-            return expiration.after(new Date());
+            return claims.getExpiration().after(new Date());
         } catch (RuntimeException e) {
-            return true; // 如果解析失败，认为 JWT 已过期或无效
+            return true; // 解析失败视为过期
         }
     }
 
-    public static String getSecretKey(){
-        return SECRET_KEY.toString();
+    /**
+     * 从 JWT 中提取权限列表
+     */
+    public static List<String> getAuthoritiesFromToken(String token) {
+        Claims claims = parseJwt(token);
+        return (List<String>) claims.get("permissions");
+    }
+
+    /**
+     * 从 JWT 中提取角色
+     */
+    public static String getRoleFromToken(String token) {
+        Claims claims = parseJwt(token);
+        return (String) claims.get("role");
+    }
+
+    /**
+     * 生成 Base64 编码的密钥（用于初始化配置文件）
+     */
+    public static String generateBase64Key() {
+        SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        return Base64.getEncoder().encodeToString(key.getEncoded());
     }
 
     // 示例用法
     public static void main(String[] args) {
-        String base64Key = java.util.Base64.getEncoder().encodeToString(SECRET_KEY.getEncoded());
-        System.out.println("签名密钥："+ base64Key+ " 请谨慎保存");
-        Map<String, Object> claims = Map.of(
-                "sub"  , "1234567890",
-                "name" , "John Doe"  ,
-                "admin", true
-        );
-
-        String jwt = generateJwt(claims);
-        System.out.println("生成的 JWT: " + jwt);
-
-        Claims parsedClaims = parseJwt(jwt);
-        System.out.println("Subject: " + parsedClaims.getSubject());
-        System.out.println("Name: "    + parsedClaims.get("name"));
-        System.out.println("Admin: "   + parsedClaims.get("admin"));
-        System.out.println("Expiration: " + parsedClaims.getExpiration());
-
-        boolean isExpired = isJwtExpired(jwt);
-        System.out.println("JWT 是否过期: " + isExpired);
+        // 生成密钥并打印（用于初始化配置文件）
+        String base64Key = generateBase64Key();
+        System.out.println("签名密钥（Base64）: " + base64Key);
     }
 }

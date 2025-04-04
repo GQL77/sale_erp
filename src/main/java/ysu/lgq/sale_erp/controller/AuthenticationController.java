@@ -25,29 +25,10 @@ public class AuthenticationController {
 
 
     @PostMapping("/login")
-    public Results<String> login(@RequestBody Map<String, Object> request) {
+    public Results login(@RequestBody Map<String, Object> request) {
         return userService.login((String)request.get("account"),(String)request.get("password"));
     }
 
-    @PostMapping("/register")
-    public Results<String> register(@RequestBody Map<String, Object> request) {
-        String account = (String)request.get("account");
-        String username = (String)request.get("username");
-        int role =(int) request.get("role");
-        String phone = (String)request.get("phone");
-        return userService.register(account,username,role,phone);
 
-    }
-
-    @PostMapping("/forgotPassword")
-    public Results<String> forgotPassword(@RequestBody Map<String, Object> request) {
-/*
-        String account = (String)request.get("account");
-        String password = (String)request.get("password");
-        String newPassword = (String)request.get("newPassword");
-        return userService.forgotPassword(account,password,newPassword);
-*/
-        return Results.Error(503,"服务不可用");
-    }
 
 }

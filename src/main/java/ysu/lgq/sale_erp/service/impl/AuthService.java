@@ -33,7 +33,7 @@ public class AuthService {
     */
     @Cacheable(value = PERMISSION_CACHE_NAME, key = "#roleId", unless = "#result.isEmpty()")
     public HashMap<Object, String> QueryRolePermission(int roleId) {
-        System.out.println("方法被调用，roleId: " + roleId);
+        //System.out.println("方法被调用，roleId: " + roleId);
 
         //获得Permission.id的List
         Map<String,Object> queryCondition = new HashMap<>();

@@ -51,6 +51,12 @@
             <artifactId>spring-boot-starter-web-services</artifactId>
         </dependency>
 
+        <!-- Spring Boot Security (spring-boot-starter-security) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
         <!-- Spring Session JDBC (spring-session-jdbc) -->
         <!-- 用途: 在集群环境中管理用户会话，实现会话共享和高可用性。 -->
 <!--        <dependency>-->
